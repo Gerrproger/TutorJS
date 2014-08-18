@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!-- TutorJS layout -->
+<svg id="tutorJS-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; z-index: 100000; width:100%; height: 100%; cursor: default; display: none">
+    <rect width="100%" height="100%" mask="url(#tutorJS-mask)"/>
+    <g id="tutorJS-hint" opacity="0">
+        <rect id="tutorJS-wrap" width="0" height="0" x="0" y="0" rx="4" ry="4" fill="url(#tutorJS-gradient2)" />
+        <text id="tutorJS-count" x="0" y="0" font-size="15px" font-weight="500" fill="#111702"></text>
+        <g id="tutorJS-next" style="cursor: pointer">
+            <rect id="tutorJS-nextW" width="70" height="24" x="0" y="0" rx="2" ry="2" fill="url(#tutorJS-gradient3)" />
+            <text id="tutorJS-nextT" x="0" y="0" font-size="14px" font-weight="500" fill="#fff">Next</text>
+        </g>
+        <g id="tutorJS-quit" style="cursor: pointer">
+            <rect id="tutorJS-quitW" width="70" height="24" x="0" y="0" rx="2" ry="2" fill="url(#tutorJS-gradient4)" />
+            <text id="tutorJS-quitT" x="0" y="0" font-size="14px" font-weight="500" fill="#fff">Quit</text>
+        </g>
+        <text id="tutorJS-text" x="0" y="0" font-size="17px" font-weight="500" fill="#000"></text>
+    </g>
+    <mask id="tutorJS-mask">
+        <rect id="tutorJS-bg" x="0" y="0" width="100%" height="100%" fill="url(#tutorJS-gradient)" opacity="0" />
+        <rect id="tutorJS-hole" x="0" y="0" width="0" height="0" rx="4" ry="4" fill="#000"></rect>
+    </mask>
+    <radialGradient id="tutorJS-gradient" cx="50%" cy="50%" r="50%">
+        <stop stop-color="#fff" offset="0" stop-opacity=".6" />
+        <stop stop-color="#fff" offset=".8" stop-opacity=".76" />
+    </radialGradient>
+    <linearGradient id="tutorJS-gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#99FF91" offset="0"/><stop stop-color="#74E359" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#B6A3FF" offset="0"/><stop stop-color="#6222E3" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#FF7881" offset="0"/><stop stop-color="#E3193B" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient5" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#6222E3" offset="0"/><stop stop-color="#B6A3FF" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient6" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#E3193B" offset="0"/><stop stop-color="#FF7881" offset="1"/>
+    </linearGradient>
+</svg>
+<!-- TutorJS layout end -->
+</body>
+</html>
