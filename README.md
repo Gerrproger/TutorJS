@@ -1,4 +1,4 @@
 TutorJS
 =======
 
-Smart tutorials for site users
+## [Demo & some api](http://gerrproger.github.io/TutorJS/)
