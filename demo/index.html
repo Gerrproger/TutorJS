@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>TutorJS demo</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+<main>
+    <section class="center">
+        <h1>TutorJS</h1>
+        <h2>Introduce your website to users. Show all features and opportunities with a step-by-step guide.</h2>
+        <button class="start" id="start">Start</button>
+    </section>
+    <section>
+        <h3>How they do it</h3>
+        <div class="column">
+            <div class="block" id="someId">
+                First of all you need to initialize the library:
+                <code>
+                    <span>tutorJS.start({</span>
+                    <span class="in">element: 'someId',</span>
+                    <span class="in">caption: 'This is it!'</span>
+                    <span>});</span>
+                </code>
+            </div>
+            <div class="block" id="array">
+                Of course for a step-by-step guide you need an Array:
+                <code>
+                    <span>tutorJS.start({</span>
+                    <span class="in">element: 'someId',</span>
+                    <span class="in">caption: 'This is it!'</span>
+                    <span>},{</span>
+                    <span class="in">element: 'array',</span>
+                    <span class="in">caption: 'Just that!'</span>
+                    <span>}]);</span>
+                </code>
+            </div>
+            <div class="block" id="position">
+                You also can set the position of the caption block:
+                <code>
+                    <span>...{</span>
+                    <span class="in">element: 'position',</span>
+                    <span class="in">caption: 'I am right!',</span>
+                    <span class="in">position: 'right'</span>
+                    <span>}...</span>
+                </code>
+            </div>
+            <div class="block" id="quit">
+                You can execute code and manually quit:
+                <code>
+                    <span>...{</span>
+                    <span class="in">element: 'quit',</span>
+                    <span class="in">caption: 'Just wait!',</span>
+                    <span class="in">position: 'top',</span>
+                    <span class="in">onActive: function(element, step){ ... }</span>
+                    <span>}...</span>
+                </code>
+                <code>
+                    <span>tutorJS.quit();</span>
+                </code>
+                <div class="counter" id="counter"></div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="block" id="auto">
+                Oh! And you can do something on quitting:
+                <code>
+                    <span>...{</span>
+                    <span class="in">element: 'quit',</span>
+                    <span class="in">caption: 'Just wait!',</span>
+                    <span class="in">position: 'left',</span>
+                    <span class="in">onActive: function(element, step){ ... }</span>
+                    <span>}], {</span>
+                    <span class="in">onQuit: function(tutor){ ... }</span>
+                    <span>});</span>
+                </code>
+                And how about some furious slideshow?
+                <code>
+                    <span>...], {</span>
+                    <span class="in">onQuit: function(tutor){ ... }</span>
+                    <span class="in">auto: 1000</span>
+                    <span>});</span>
+                </code>
+            </div>
+            <div class="block" id="stop">
+                Yeah, just stop it if bored:
+                <code>
+                    <span>tutorJS.stop();</span>
+                </code>
+                Or continue again:
+                <code>
+                    <span>tutorJS.next(3000);</span>
+                </code>
+                Or just show the next slide:
+                <code>
+                    <span>tutorJS.next();</span>
+                </code>
+            </div>
+            <div class="block highlight">
+
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="center">
+    &copy; Gerrproger 2014
+</footer>
+
+<!-- TutorJS layout -->
+<svg id="tutorJS-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: fixed; z-index: 100000; width:100%; height: 100%; cursor: default; top: 0; left: 0; display: none">
+    <rect width="100%" height="100%" mask="url(#tutorJS-mask)"/>
+    <g id="tutorJS-hint" opacity="0">
+        <rect id="tutorJS-wrap" width="0" height="0" x="0" y="0" rx="4" ry="4" fill="url(#tutorJS-gradient2)" />
+        <text id="tutorJS-count" x="0" y="0" font-size="15px" font-weight="500" fill="#111702"></text>
+        <g id="tutorJS-next" style="cursor: pointer">
+            <rect id="tutorJS-nextW" width="70" height="24" x="0" y="0" rx="2" ry="2" fill="url(#tutorJS-gradient3)" />
+            <text id="tutorJS-nextT" x="0" y="0" font-size="14px" font-weight="500" fill="#fff">Next</text>
+        </g>
+        <g id="tutorJS-quit" style="cursor: pointer">
+            <rect id="tutorJS-quitW" width="70" height="24" x="0" y="0" rx="2" ry="2" fill="url(#tutorJS-gradient4)" />
+            <text id="tutorJS-quitT" x="0" y="0" font-size="14px" font-weight="500" fill="#fff">Quit</text>
+        </g>
+        <text id="tutorJS-text" x="0" y="0" font-size="17px" font-weight="500" fill="#000"></text>
+    </g>
+    <mask id="tutorJS-mask">
+        <rect id="tutorJS-bg" x="0" y="0" width="100%" height="100%" fill="url(#tutorJS-gradient)" opacity="0" />
+        <rect id="tutorJS-hole" x="0" y="0" width="0" height="0" rx="4" ry="4" fill="#000"></rect>
+    </mask>
+    <radialGradient id="tutorJS-gradient" cx="50%" cy="50%" r="50%">
+        <stop stop-color="#fff" offset="0" stop-opacity=".6" />
+        <stop stop-color="#fff" offset=".8" stop-opacity=".76" />
+    </radialGradient>
+    <linearGradient id="tutorJS-gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#99FF91" offset="0"/><stop stop-color="#74E359" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#B6A3FF" offset="0"/><stop stop-color="#6222E3" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient4" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#FF7881" offset="0"/><stop stop-color="#E3193B" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient5" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#6222E3" offset="0"/><stop stop-color="#B6A3FF" offset="1"/>
+    </linearGradient>
+    <linearGradient id="tutorJS-gradient6" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop stop-color="#E3193B" offset="0"/><stop stop-color="#FF7881" offset="1"/>
+    </linearGradient>
+</svg>
+<!-- TutorJS layout end -->
+
+<script src="../tutor.js"></script>
+<script>
+    tutorJS.on(tutorJS.ID('start'), 'click', function(){
+        var start = false,
+            quit = false,
+            h1 = tutorJS.EL('h1');
+        tutorJS.start([{
+            element: h1,
+            caption: 'TutorJS uses SVG to create perfect overlay layer and fancy animations! So you can tune it yourself.'
+        },{
+            element: 'someId',
+            caption: 'This is it!'
+        },{
+            element: 'array',
+            caption: 'Just that!'
+        },{
+            element: 'position',
+            caption: 'I am right!',
+            position: 'right'
+        },{
+            element: 'quit',
+            caption: 'Just wait!',
+            position: 'top',
+            onActive: function(){
+                var i = 6,
+                    el = tutorJS.ID('counter');
+                function count(){
+                    if(quit){
+                        quit = false;
+                        el.innerHTML = '';
+                        return;
+                    }
+                    el.innerHTML = i;
+                    if(i!=0) setTimeout(count, 1000);
+                    else {
+                        start = true;
+                        tutorJS.quit();
+                    }
+                    i--;
+                }
+                count();
+            }
+        }], {
+            onQuit: function(){
+                tutorJS.ID('counter').innerHTML = '';
+                if(start){
+                    tutorJS.start([{
+                        element: 'auto',
+                        caption: 'Press next to see automatic slideshow :)',
+                        position: 'left'
+                    },{
+                        element: h1,
+                        caption: '',
+                        onActive: function(){
+                            tutorJS.start([{
+                                element: h1,
+                                caption: 'Wait please...'
+                            },{
+                                element: 'someId',
+                                caption: 'Wait please....'
+                            },{
+                                element: 'array',
+                                caption: 'Wait please.....',
+                                position: 'right'
+                            },{
+                                element: 'position',
+                                caption: 'Wait please......',
+                                position: 'rigth'
+                            },{
+                                element: 'stop',
+                                caption: 'That\'s all!',
+                                position: 'top',
+                                onActive: function(){
+                                    tutorJS.stop();
+                                }
+                            }], {auto: 2000});
+                        }
+                    }]);
+                    start = false;
+                } else quit = true;
+            }
+        });
+    });
+</script>
+</body>
+</html>

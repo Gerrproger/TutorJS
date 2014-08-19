@@ -1,14 +1,15 @@
 /*!
  * TutorJS - smart tutorials for site users
- * @version  v1.0
+ * @version  v1.1
  * @author   Evgenii Dulikov
  * http://datatables.net/license_gpl2
  * Copyright 2014 Evgenii Dulikov <gerrproger@gmail.com>
  * https://github.com/Gerrproger/TutorJS
  */
 (function(){
+    "use strict";
     window.tutorJS = {
-        VERSION: 1,
+        VERSION: 1.1,
         canva: null,
         hole: null,
         bg: null,
@@ -28,6 +29,9 @@
         auto: null,
         onQuit: null,
         nodes: [],
+        htmlOv: null,
+        bodyOv: null,
+        html: null,
         butW: 80,  // Nav buttons width
         butH: 34,  // Nav buttons height
         t: 300,    // Animation Speed
@@ -46,6 +50,12 @@
         TAG: function(str){
             return document.getElementsByTagName(str);
         },
+        EL: function(str){
+            return document.querySelector(str);
+        },
+        ELS: function(str){
+            return document.querySelectorAll(str);
+        },
 
         /* Staff functions */
         anim: function(p, obj, f){
@@ -59,7 +69,7 @@
                 'keySplines': '0.42 0 0.58 1',
                 'calcMode': 'spline'});
             p.appendChild(el);
-            el.beginElement();
+            if(el.beginElement) el.beginElement();
             attr[obj.attr] = obj.to;
             setTimeout(function(){
                 self.attr(p, attr);
@@ -73,7 +83,7 @@
         },
 
         attr: function(el, vals){
-            for(var attr in vals) el.setAttribute(attr, vals[attr]);
+            for(var attr in vals) el.setAttributeNS(null, attr, vals[attr]);
             return this;
         },
 
@@ -88,14 +98,7 @@
         },
 
         offset: function(el){
-            var top=0,
-                left=0;
-            while(el){
-                top += parseFloat(el.offsetTop);
-                left += parseFloat(el.offsetLeft);
-                el = el.offsetParent;
-            }
-            return {top: Math.round(top), left: Math.round(left)};
+            return el.getBoundingClientRect();
         },
         width: function(el){
             return el.offsetWidth;
@@ -103,12 +106,29 @@
         height: function(el){
             return el.offsetHeight;
         },
+        positionTop: function(el){
+            var p = 0;
+            while(el){
+                p += parseFloat(el.offsetTop);
+                el = el.offsetParent;
+            }
+            return p;
+        },
+        scrolledTop: function(){
+            return (document.documentElement.scrollTop || document.body.scrollTop || 0);
+        },
+
+        isInView: function(el){
+            var self = this,
+                elTop = self.positionTop(el),
+                elBottom = elTop+self.height(el),
+                wTop = self.scrolledTop(),
+                wBottom = wTop+document.documentElement.clientHeight;
+            return (elBottom<=wBottom && elTop>=wTop);
+        },
 
         go: function(el){
             var self = this;
-            if(typeof el === 'string') el = self.ID(el);
-            if(!(el instanceof HTMLElement))
-                throw new Error('No such element on this page! [' + (self.active+1) + '](' + self.elements[self.active].element +')');
             var offs = self.offset(el),
                 w = self.width(el),
                 h = self.height(el);
@@ -171,7 +191,15 @@
                     offs4 = self.tNext.getBBox(),
                     offs5 = self.tQuit.getBBox(),
                     temp = self.butW*2+offs3.width+self.pad*2;
-                if(offs2.width < temp) offs2.width = temp;
+                if(offs2.width < temp){
+                    var offs0 = { // IE fix
+                        width: temp,
+                        height: offs2.height,
+                        x: offs2.x,
+                        y: offs2.y
+                    };
+                    offs2 = offs0;
+                }
                 switch(pos){
                     case 'top': {
                         x = offs.left+self.pad;
@@ -219,9 +247,14 @@
                 return self;
             }
             if(auto && auto!='re') self.auto = auto;
+            var elem = self.elements[self.active].element;
+            if(typeof elem === 'string') elem = self.ID(elem);
+            if(!(elem instanceof HTMLElement))
+                throw new Error('No such element on this page! [' + (self.active+1) + '](' + self.elements[self.active].element +')');
+            if(!self.isInView(elem)) window.scrollTo(0, self.positionTop(elem)-self.pad);
             if(typeof self.elements[self.active].onActive === 'function')
-                self.elements[self.active].onActive(self.elements[self.active].element, self.active+1);
-            var offs = self.go(self.elements[self.active].element);
+                self.elements[self.active].onActive(elem, self.active+1);
+            var offs = self.go(elem);
             self.texter(self.elements[self.active].caption, offs, self.elements[self.active].position)
             .active++;
             if(self.auto) setTimeout(function(){self.next('re');}, self.auto);
@@ -252,8 +285,12 @@
                 self.tQuit = self.ID('tutorJS-quitT');
                 self.tCount = self.ID('tutorJS-count');
                 self.hint = self.ID('tutorJS-hint');
+                self.html = self.EL('html');
+                self.htmlOv = self.html.style.overflow;
+                self.bodyOv = document.body.style.overflow;
                 self.on(self.ID('tutorJS-next'), 'click', function(){
                     self.next();
+                    self.attr(self.bNext, {fill: 'url(#tutorJS-gradient3)'});
                 }).on('mouseover', function(){
                     self.attr(self.bNext, {fill: 'url(#tutorJS-gradient5)'});
                 }).on('mouseout', function(){
@@ -267,10 +304,11 @@
                     self.attr(self.bQuit, {fill: 'url(#tutorJS-gradient4)'});
                 });
                 self.inited = true;
-            } if(self.nAll){
+            } else if(self.nAll){
                     self.tCount.removeChild(self.nAll);
                     self.nAll = null;
                 }
+            self.html.style.overflow = document.body.overflow = 'hidden';
             self.nAll = self.create('/'+self.elements.length, true);
             self.tCount.appendChild(self.nAll);
             self.canva.style.display = 'block';
@@ -285,12 +323,13 @@
             self.anim(self.hole, {attr: 'opacity', to: 0, dur: self.t})
             .anim(self.hint, {attr: 'opacity', to: 0, dur: self.t})
             .anim(self.bg,{attr: 'opacity', to: 0, dur: self.t*3}, function(){
+                self.html.style.overflow = self.htmlOv;
+                document.body.style.overflow = self.bodyOv;
                 self.canva.style.display = 'none';
                 self.attr(self.hole, {'width': 0, 'height': 0, 'x': 0, 'y': 0, 'opacity': 1});
                 if(typeof self.onQuit === 'function') self.onQuit(self);
             });
             return self;
         }
-
     }
 })();
