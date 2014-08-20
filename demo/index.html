@@ -2,10 +2,18 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>TutorJS demo</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="viewport" content="width=1040, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
+<header>
+    <nav>
+        <a class="logo" href="/">TutorJS</a>
+        <span class="version">last version - v1.2</span>
+        <a class="out" target="_blank" href="https://github.com/Gerrproger/TutorJS">Github</a>
+        <a class="out" target="_blank" href="https://github.com/Gerrproger/TutorJS/archive/master.zip">Download</a>
+    </nav>
+</header>
 <main>
     <section class="center">
         <h1>TutorJS</h1>
@@ -75,7 +83,7 @@
                     <span class="in">onQuit: function(tutor){ ... }</span>
                     <span>});</span>
                 </code>
-                And how about some furious slideshow?
+                And how about some furious slideshow:
                 <code>
                     <span>...], {</span>
                     <span class="in">onQuit: function(tutor){ ... }</span>
@@ -97,8 +105,27 @@
                     <span>tutorJS.next();</span>
                 </code>
             </div>
+            <div class="block">
+                You can manually recalculate elements positions:
+                <code>
+                    <span>tutorJS.recalc();</span>
+                </code>
+            </div>
             <div class="block highlight">
-
+                <strong>Browser Compatibility:</strong>
+                <ul><li>
+                    iOS
+                </li><li>
+                    Android
+                </li><li>
+                    Chrome
+                </li><li>
+                    Safari
+                </li><li>
+                    Firefox
+                </li><li>
+                    IE9+ (<a href="http://caniuse.com/#feat=svg-smil" target="_blank">not supports animation</a>)
+                </li></ul>
             </div>
         </div>
     </section>
