@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
     <title>TutorJS demo</title>
     <meta name="viewport" content="width=1040, user-scalable=no" />
@@ -9,7 +9,7 @@
 <header>
     <nav>
         <a class="logo" href="/">TutorJS</a>
-        <span class="version">last version - v1.2</span>
+        <span class="version">latest version - v1.3</span>
         <a class="out" target="_blank" href="https://github.com/Gerrproger/TutorJS">Github</a>
         <a class="out" target="_blank" href="https://github.com/Gerrproger/TutorJS/archive/master.zip">Download</a>
     </nav>
@@ -21,8 +21,8 @@
         <button class="start" id="start">Start</button>
     </section>
     <section>
-        <h3>How they do it</h3>
         <div class="column">
+            <h3>How they do it..</h3>
             <div class="block" id="someId">
                 First of all you need to initialize the library:
                 <code>
@@ -69,25 +69,17 @@
                 </code>
                 <div class="counter" id="counter"></div>
             </div>
-        </div>
-        <div class="column">
             <div class="block" id="auto">
                 Oh! And you can do something on quitting:
                 <code>
-                    <span>...{</span>
-                    <span class="in">element: 'quit',</span>
-                    <span class="in">caption: 'Just wait!',</span>
-                    <span class="in">position: 'left',</span>
-                    <span class="in">onActive: function(element, step){ ... }</span>
-                    <span>}], {</span>
+                    <span>...}], {</span>
                     <span class="in">onQuit: function(tutor){ ... }</span>
                     <span>});</span>
                 </code>
                 And how about some furious slideshow:
                 <code>
                     <span>...], {</span>
-                    <span class="in">onQuit: function(tutor){ ... }</span>
-                    <span class="in">auto: 1000</span>
+                    <span class="in">auto: 2000</span>
                     <span>});</span>
                 </code>
             </div>
@@ -104,14 +96,86 @@
                 <code>
                     <span>tutorJS.next();</span>
                 </code>
+                Note that you can disable buttons and slide numbers:
+                <code>
+                    <span>...], {</span>
+                    <span class="in">showNext: false,</span>
+                    <span class="in">showQuit: false,</span>
+                    <span class="in">showCount: false</span>
+                    <span>});</span>
+                </code>
+            </div>
+        </div>
+        <div class="column">
+            <h3>Also!</h3>
+            <div class="block" id="bgquit">
+                Did you know that you can quit tutor by clicking on the dark layout? So you can disable that:
+                <code>
+                    <span>...], {</span>
+                    <span class="in">bgQuit: false</span>
+                    <span>});</span>
+                </code>
+            </div>
+            <div class="block" id="alerting">
+                Also you can get some needed info at any time since tutorJS was initialized:
+                <code>
+                    <span>alert(</span>
+                    <span class="in">'This slide number is:'+ tutorJS.active +</span>
+                    <span class="in">'Your options is:'+ JSON.stringify(tutorJS.options) +</span>
+                    <span class="in">'OnActive callback is:'+ tutorJS.activeEl.onActive</span>
+                    <span>);</span>
+                </code>
+            </div>
+            <div class="block" id="area">
+                And you can even highlight some area and not just an element! Also it is not necessarily to specify
+                captions:
+                <code>
+                    <span>...{</span>
+                    <span class="in">element: {</span>
+                    <span class="in2">top: 200,</span>
+                    <span class="in2">left: 200,</span>
+                    <span class="in2">width: 50,</span>
+                    <span class="in2">height: 50</span>
+                    <span class="in">},</span>
+                    <span class="in">position: 'top'</span>
+                    <span>}...</span>
+                </code>
+            </div>
+            <div class="block" id="hideHint">
+                You can generally hide the hint block at all:
+                <code>
+                    <span>...], {</span>
+                    <span class="in">showHint: false</span>
+                    <span>});</span>
+                </code>
+                What is really cool is that you can change settings on the fly! Even redefine your active element:
+                <code>
+                    <span>tutorJS.set({</span>
+                    <span class="in">showQuit: false,</span>
+                    <span class="in">showNext: true,</span>
+                    <span class="in">bgQuit: true</span>
+                    <span>},{</span>
+                    <span class="in">position: 'left'</span>
+                    <span class="in">caption: 'Yap, that\'s cool!'</span>
+                    <span>});</span>
+                </code>
+                <div class="counter" id="counter2"></div>
             </div>
             <div class="block">
-                You can manually recalculate elements positions:
+                You can also manually recalculate elements positions:
                 <code>
                     <span>tutorJS.recalc();</span>
                 </code>
             </div>
-            <div class="block highlight">
+            <div class="block">
+                And of course you can set time for animations (it would be the factor in some cases):
+                <code>
+                    <span>...], {</span>
+                    <span class="in">time: 1000</span>
+                    <span>});</span>
+                </code>
+            </div>
+            <div class="block highlight" id="browsers">
                 <strong>Browser Compatibility:</strong>
                 <ul><li>
                     iOS
@@ -136,7 +200,7 @@
 
 <!-- TutorJS layout -->
 <svg id="tutorJS-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: fixed; z-index: 100000; width:100%; height: 100%; cursor: default; top: 0; left: 0; display: none">
-    <rect width="100%" height="100%" mask="url(#tutorJS-mask)"/>
+    <rect id="tutorJS-bg" width="100%" height="100%" mask="url(#tutorJS-mask)" opacity="0" />
     <g id="tutorJS-hint" opacity="0">
         <rect id="tutorJS-wrap" width="0" height="0" x="0" y="0" rx="4" ry="4" fill="url(#tutorJS-gradient2)" />
         <text id="tutorJS-count" x="0" y="0" font-size="15px" font-weight="500" fill="#111702"></text>
@@ -151,7 +215,7 @@
         <text id="tutorJS-text" x="0" y="0" font-size="17px" font-weight="500" fill="#000"></text>
     </g>
     <mask id="tutorJS-mask">
-        <rect id="tutorJS-bg" x="0" y="0" width="100%" height="100%" fill="url(#tutorJS-gradient)" opacity="0" />
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#tutorJS-gradient)" />
         <rect id="tutorJS-hole" x="0" y="0" width="0" height="0" rx="4" ry="4" fill="#000"></rect>
     </mask>
     <radialGradient id="tutorJS-gradient" cx="50%" cy="50%" r="50%">
@@ -198,7 +262,7 @@
         },{
             element: 'quit',
             caption: 'Just wait!',
-            position: 'top',
+            position: 'right',
             onActive: function(){
                 var i = 6,
                     el = tutorJS.ID('counter');
@@ -217,6 +281,7 @@
                     i--;
                 }
                 count();
+                tutorJS.set({showNext: false, showQuit: false, bgQuit: false}, {onActive: null});
             }
         }], {
             onQuit: function(){
@@ -225,10 +290,10 @@
                     tutorJS.start([{
                         element: 'auto',
                         caption: 'Press next to see automatic slideshow :)',
-                        position: 'left'
+                        position: 'right'
                     },{
                         element: h1,
-                        caption: '',
+                        caption: 'Wait please...',
                         onActive: function(){
                             tutorJS.start([{
                                 element: h1,
@@ -246,12 +311,71 @@
                                 position: 'rigth'
                             },{
                                 element: 'stop',
-                                caption: 'That\'s all!',
+                                caption: 'Now you can do more crazy staff!',
                                 position: 'top',
                                 onActive: function(){
                                     tutorJS.stop();
                                 }
-                            }], {auto: 2000});
+                            }], {
+                                auto: 2000,
+                                showNext: false,
+                                showQuit: true,
+                                showCount: false,
+                                onQuit: function () {
+                                    tutorJS.start([{
+                                        element: 'bgquit',
+                                        caption: 'No quitting!',
+                                        position: 'left'
+                                    },{
+                                        element: 'alerting',
+                                        caption: 'This is useful!',
+                                        onActive: function () {
+                                            alert('This slide number is: ' + tutorJS.active + '  Your options is: ' + JSON.stringify(tutorJS.options) + 'OnActive callback is: ' + tutorJS.activeEl.onActive);
+                                        }
+                                    },{
+                                        element: 'area',
+                                        caption: 'Press next to see!'
+                                    },{
+                                        element: {
+                                            top: 200,
+                                            left: 200,
+                                            width: 50,
+                                            height: 50
+                                        },
+                                        position: 'right'
+                                    },{
+                                        element: 'hideHint',
+                                        caption: 'Was hidden!',
+                                        position: 'left',
+                                        onActive: function () {
+                                            tutorJS.set({showHint: false});
+                                            var i = 6,
+                                                el = tutorJS.ID('counter2');
+                                            function count() {
+                                                el.innerHTML = i;
+                                                if (i >= 0) setTimeout(count, 1000);
+                                                else {
+                                                    el.innerHTML = '';
+                                                    tutorJS.set({
+                                                        showQuit: false,
+                                                        showHint: true,
+                                                        bgQuit: true
+                                                    }, {
+                                                        position: 'left',
+                                                        caption: 'Yap, that\'s cool!'
+                                                    });
+                                                }
+                                                i--;
+                                            }
+                                            count();
+                                        }
+                                    },{
+                                        element: 'browsers',
+                                        caption: 'That\'s all for now!',
+                                        position: 'top'
+                                    }], {bgQuit: false});
+                                }
+                            });
                         }
                     }]);
                     start = false;
