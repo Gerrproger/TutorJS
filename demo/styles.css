@@ -131,6 +131,10 @@ header nav {
     padding: 0 10px;
     font-size: 14px;
     font-style: italic;
+    color: #fff;
+}
+.version:hover {
+    font-weight: 600;
 }
 header a.out {
     float: right;
