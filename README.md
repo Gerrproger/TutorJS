@@ -29,8 +29,21 @@ Place code in the `<body>` of your document:
   ...
 </svg>
 ```
-
 _Note:_ You can change svg styles as you like!
+
+And just start your tutorial:
+```javascript
+tutorJS.start([{
+    element: 'someId',
+    caption: 'This is it!'
+},{
+    element: 'anotherId',
+    position: 'top'
+}], {
+    auto: 4000,
+    time: 400
+});
+```
 
 
 
@@ -220,7 +233,6 @@ An object with the current step data for the current tutorial (as in the start m
 <br>**Required:** no
 
 
-<br>
 ------
 ## Getting data
 You can get some data of the current tutorial and the current element.
@@ -346,7 +358,7 @@ var newNode = tutorJS.create('My special text', true);
 ```
 
 ### tutorJS.anim
-Animates SVG element via adding animate tag. Just pass the special object with the parametrs ({attr: , to: , dur: }). Supports chaining. Only for SVG!
+Animates SVG element via adding animate tag. Just pass the special object with the parametrs (`{attr: , to: , dur: }`). Supports chaining. Only for SVG!
 ```javascript
 tutorJS.anim(element, {attr: 'opacity', to: 1, dur: 300}, callback1)
         .and({attr: 'height', to: '200px', dur: 1000}, callback2)
