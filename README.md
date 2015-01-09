@@ -14,7 +14,8 @@ TutorJS
 * [https://github.com/Gerrproger/TutorJS/blob/master/LICENS](https://github.com/Gerrproger/TutorJS/blob/master/LICENSE)
 
 
-
+## You can use <a href="http://bower.io/" target="_blank">bower</a> for installation:
+#### `bower install tutorjs`  
 
 # Usage
 
