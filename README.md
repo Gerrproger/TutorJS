@@ -71,7 +71,9 @@ An array of objects or just an object with steps data for your tutorial.
   onActive: function(){}
 }]
 ```
+<br>**Type:** array of objects / object
 <br>**Required:** yes
+
 #### options
 An object with options for this tutorial instance.
 ```javascript
@@ -81,10 +83,11 @@ An object with options for this tutorial instance.
   showHint: false
 }
 ```
+<br>**Type:** object
 <br>**Required:** no
 
 ### element.element
-An element to highlight. Can be the `id` or DOM object or coordinates object (`{top: , left: , width: , height: }` in px).
+An element to highlight. Can be the `id` or DOM object or coordinates object (`{top: <>, left: <>, width: <>, height: <>}` in px).
 ```javascript
 element: 'someId'
 // or
@@ -214,7 +217,7 @@ tutorJS.next();
 
 Recalculates TutorJS elements positions (highlighting and the hint). No parametrs.
 ```javascript
-tutorJS.next();
+tutorJS.recalc();
 ```
 
 
@@ -297,7 +300,7 @@ var obj = tutorJS.extend(obj1, obj2);
 ### tutorJS.attr
 Adds attributes to the element from the passed object.
 ```javascript
-var el = tutorJS.extend(tutorJS.EL('input'), {required: 'required', placeholder: 'Required input!'});
+var el = tutorJS.attr(tutorJS.EL('input'), {required: 'required', placeholder: 'Required input!'});
 ```
 
 ### tutorJS.offset
@@ -326,13 +329,13 @@ var elementTop = tutorJS.positionTop(element);
 ```
 
 ### tutorJS.scrolledTop
-Returns number odf scrolled pixels (from the top of the document).
+Returns number of the scrolled pixels (from the top of the document).
 ```javascript
 var scr = tutorJS.scrolledTop();
 ```
 
 ### tutorJS.animateScroll
-Scrolles to the passed psition with animation (vertically).
+Scrolles to the passed position with animation (vertically).
 ```javascript
 tutorJS.animateScroll(position, callback);
 ```
@@ -359,7 +362,7 @@ var newNode = tutorJS.create('My special text', true);
 ```
 
 ### tutorJS.anim
-Animates SVG element via adding animate tag. Just pass the special object with the parametrs (`{attr: , to: , dur: }`). Supports chaining. Only for SVG!
+Animates SVG element via adding animate tag. Just pass the special object with the parametrs (`{attr: <>, to: <>, dur: <>}`). Supports chaining. Only for SVG!
 ```javascript
 tutorJS.anim(element, {attr: 'opacity', to: 1, dur: 300}, callback1)
         .and({attr: 'height', to: '200px', dur: 1000}, callback2)
