@@ -97,7 +97,7 @@ element: {top: 100, left: 100, width: 50, height: 50}
 <br>**Required:** yes
 
 ### element.caption
-Text that would be displayed on the hint when the element would be highlighted
+Text that will be displayed on the hint when the element is highlighted
 ```javascript
 caption: 'This is some super button!'
 ```
@@ -106,7 +106,7 @@ caption: 'This is some super button!'
 <br>**Required:** no
 
 ### element.position
-Position of the hint  relative to the element. Can be `left`, `top`, `right` or `bottom`.
+Position of the hint  related to the element. Can be `left`, `top`, `right` or `bottom`.
 ```javascript
 position: 'right'
 ```
@@ -125,7 +125,7 @@ onActive: function(element, step){ console.log('This is it!', element) }
 
 
 ### options.auto
-Automatically switches steps (autoplay). Just pass dalay for viewing one step (ms). Pass `0` for no autoplaying.
+Automatically switches steps (autoplay). Just pass delay for viewing one step (ms). Pass `0` for no autoplaying.
 ```javascript
 auto: 1000
 ```
@@ -134,7 +134,7 @@ auto: 1000
 <br>**Required:** no
 
 ### options.onQuit
-Function that would be called on quitting active tutorial. 
+Function that is called on quitting active tutorial. 
 ```javascript
 onQuit: function(instance){ console.log('Tutor has ended!'); }
 ```
@@ -188,7 +188,7 @@ showHint: false
 <br>**Required:** no
 
 ### options.time
-The average duration of animations and effects in ms (this actionally is the factor).
+The average duration of animations and effects in ms (this actually is the factor).
 ```javascript
 time: 1000
 ```
@@ -215,7 +215,7 @@ tutorJS.next();
 
 ## recalc
 
-Recalculates TutorJS elements positions (highlighting and the hint). No parametrs.
+Recalculates TutorJS elements positions (highlighting and the hint). No parameters.
 ```javascript
 tutorJS.recalc();
 ```
@@ -323,7 +323,7 @@ var elementHeight = tutorJS.height(element);
 ```
 
 ### tutorJS.positionTop
-Returns the top offset of the element relative to the document (in px).
+Returns the top offset of the element related to the document (in px).
 ```javascript
 var elementTop = tutorJS.positionTop(element);
 ```
@@ -335,7 +335,7 @@ var scr = tutorJS.scrolledTop();
 ```
 
 ### tutorJS.animateScroll
-Scrolles to the passed position with animation (vertically).
+Scrolls to the passed position with animation (vertically).
 ```javascript
 tutorJS.animateScroll(position, callback);
 ```
@@ -362,7 +362,7 @@ var newNode = tutorJS.create('My special text', true);
 ```
 
 ### tutorJS.anim
-Animates SVG element via adding animate tag. Just pass the special object with the parametrs (`{attr: <>, to: <>, dur: <>}`). Supports chaining. Only for SVG!
+Animates SVG element via adding animate tag. Just pass the special object with the parameters (`{attr: <>, to: <>, dur: <>}`). Supports chaining. Only for SVG!
 ```javascript
 tutorJS.anim(element, {attr: 'opacity', to: 1, dur: 300}, callback1)
         .and({attr: 'height', to: '200px', dur: 1000}, callback2)
