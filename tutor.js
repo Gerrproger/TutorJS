@@ -1,9 +1,9 @@
 /*!
  * TutorJS - smart tutorials for site users
  * @version  v1.3
- * @author   Evgenii Dulikov
+ * @author   Gerrproger
  * http://datatables.net/license_gpl2
- * Copyright 2014 Evgenii Dulikov <gerrproger@gmail.com>
+ * Copyright 2014 Gerrproger <gerrproger@gmail.com>
  * https://github.com/Gerrproger/TutorJS
  */
 (function(){
