@@ -1,0 +1,5 @@
+node_modiles
+.cache
+.tmp
+dist
+*.min.js

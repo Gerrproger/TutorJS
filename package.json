@@ -1,0 +1,18 @@
+{
+  "name": "tutorjs",
+  "version": "1.3.1",
+  "author": "Gerrproger",
+  "license": "GPLV2",
+  "description": "Interactive step-by-step tutorials with elements highlighting for your website, made with SVG",
+  "repository": "https://github.com/Gerrproger/TutorJS",
+  "main": "tutor.min.js",
+  "scripts": {
+    "lint": "eslint . -c .eslintrc.js",
+    "lint:fix": "eslint . -c .eslintrc.js --fix",
+    "build": "esbuild --platform=browser --target=es5,ie9 --minify --outdir=./ --out-extension:.js=.min.js tutor.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.10",
+    "eslint": "^8.34.0"
+  }
+}
