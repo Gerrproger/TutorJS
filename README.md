@@ -15,7 +15,7 @@
 
 ### License
 
-- [https://github.com/Gerrproger/TutorJS/blob/master/LICENS](https://github.com/Gerrproger/TutorJS/blob/master/LICENSE)
+- [https://github.com/Gerrproger/TutorJS/blob/master/LICENSE](https://github.com/Gerrproger/TutorJS/blob/master/LICENSE)
 
 ### You can use Bower or NPM for installation:
 
