@@ -12,7 +12,7 @@
     "build": "esbuild --platform=browser --target=es5,ie9 --minify --outdir=./ --out-extension:.js=.min.js tutor.js"
   },
   "devDependencies": {
-    "esbuild": "^0.17.10",
+    "esbuild": "^0.20.0",
     "eslint": "^8.34.0"
   }
 }
